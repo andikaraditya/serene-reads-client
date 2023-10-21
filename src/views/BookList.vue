@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="text-center">News On The Literature World</h1>
+        <h1 class="text-center">Available Communities</h1>
         <div id="news-container">
             <Card />
         </div>
@@ -10,7 +10,6 @@
 <script>
 import Card from "../components/Card.vue";
     export default {
-        name: "NewsPage",
         components: {
             Card
         }

@@ -10,7 +10,7 @@
             </div>
             <div class="col">
                 <a 
-                @click.prevent="$router.push('/')"
+                @click.prevent="$router.push('/books')"
                 href="#">
                     Home
                 </a>

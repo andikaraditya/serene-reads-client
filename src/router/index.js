@@ -4,6 +4,7 @@ import ForumPage from '../views/ForumPage.vue';
 import GenresPage from '../views/GenresPage.vue';
 import NewsPage from '../views/NewsPage.vue';
 import SearchPage from '../views/SearchPage.vue';
+import BookList from '../views/BookList.vue';
 
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
       path: "/news",
       name: "NewsPage",
       component: NewsPage
+    },
+    {
+      path: "/books",
+      name: "BookList",
+      component: BookList
     },
   ]
 })

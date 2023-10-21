@@ -3,58 +3,26 @@
         <h1 class="text-center">Available Genres</h1>
 
         <div id="genre-container" class="d-flex flex-wrap justify-content-between">
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Mystery & Suspense</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Science Fiction & Fantasy</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Animals, Bugs & Pets</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Art, Creativity & Music</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>General Literature</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Hobbies, Sports & Outdoors</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Science & Technology</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Real Life</h3>
-                </div>
-            </div>
-            <div class="card text-center mt-4 mb-2">
-                <div>
-                    <h3>Reference</h3>
-                </div>
-            </div>
+            <GenresCard 
+            v-for="category in categories"
+            :category="category"
+            />
         </div>
     </div>
 </template>
 
 <script>
+import { mapState } from "pinia";
+import {bookStore} from "../stores/books";
+import GenresCard from "../components/GenresCard.vue";
     export default {
-        name: "GenresPage"
+        name: "GenresPage",
+        components: {
+            GenresCard
+        },
+        computed: {
+            ...mapState(bookStore, ["categories"])
+        }
     }
 </script>
 
@@ -79,18 +47,6 @@ h1 {
 
 .card:hover {
     cursor: pointer;
-}
-
-.card div {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.425);
-    display: flex;
-}
-
-h3 {
-    margin: auto;
-    color: white;
 }
 
 .card:nth-of-type(1) {
