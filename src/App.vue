@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar/>
-    <h1>Serene Reads</h1>
+    <router-view></router-view>
   </div>
 </template>
 
