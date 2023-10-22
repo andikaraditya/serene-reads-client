@@ -2,16 +2,32 @@
     <div>
         <h1 class="text-center">Available Communities</h1>
         <div id="community-container">
-            <Card />
+            <Card 
+            v-for="(book, index) in books"
+            :key="index"
+            :book="book"
+            />
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions, mapState } from "pinia";
+import {bookStore} from "../stores/bookStore";
 import Card from "../components/Card.vue";
     export default {
+        name: "BookList",
         components: {
             Card
+        },
+        computed: {
+            ...mapState(bookStore, ["books"])
+        },
+        methods: {
+            ...mapActions(bookStore, ["fetchBooks"])
+        },
+        created(){
+            this.fetchBooks()
         }
     }
 </script>
