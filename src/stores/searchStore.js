@@ -4,13 +4,15 @@ import { Axios } from "../helpers/axios";
 export const searchStore = defineStore("search", {
     state: () => ({
         categories: ['Mystery & Suspense', 'Science Fiction & Fantasy', 'Animals, Bugs & Pets', 'Art, Creativity & Music', 'General Literature', 'Hobbies, Sports & Outdoors', 'Science & Technology', 'Real Life','Reference'],
-        searchResults: []
+        searchResults: [],
+        loading: true
     }),
     getters: {
 
     },
     actions: {
         async handleSearch(form){
+            this.loading = true
             try {
                 const query = {}
                 for (const key in form) {
@@ -31,8 +33,9 @@ export const searchStore = defineStore("search", {
                     params: query
                 })
 
-                this.searchResults = data
                 this.$router.push({path: "/search", query: query})
+                this.searchResults = data
+                this.loading = false
             } catch (error) {
                 console.log(error)
             }

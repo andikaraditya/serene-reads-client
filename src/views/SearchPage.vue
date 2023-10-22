@@ -54,7 +54,14 @@
             </form>
         </div>
         <div class="search-container">
+            <div 
+            v-if="loading"
+            class="text-center">
+                <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" alt="">
+                <p class="fs-1">Loading data</p>
+            </div>
             <Card
+            v-else
             v-for="searchItem in searchResults"
             :book="searchItem"
             />
@@ -93,7 +100,7 @@ import Card from "../components/Card.vue";
             Card
         },
         computed: {
-            ...mapState(searchStore, ["categories", "searchResults"])
+            ...mapState(searchStore, ["categories", "searchResults", "loading"])
         },
         methods: {
             ...mapActions(searchStore, ["handleSearch"]),
