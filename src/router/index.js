@@ -8,6 +8,8 @@ import BookList from '../views/BookList.vue';
 import ForumPosts from '../views/ForumPosts.vue';
 import PostDetail from '../views/PostDetail.vue';
 import CreatePost from '../views/CreatePost.vue';
+import LoginPage from '../views/LoginPage.vue';
+import RegisterPage from '../views/RegisterPage.vue';
 
 
 const router = createRouter({
@@ -60,6 +62,16 @@ const router = createRouter({
       name: "BookList",
       component: BookList
     },
+    {
+      path: "/login",
+      name: "LoginPage",
+      component: LoginPage
+    },
+    {
+      path: "/register",
+      name: "RegisterPage",
+      component: RegisterPage
+    }
   ]
 })
 
