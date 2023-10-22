@@ -24,7 +24,7 @@ export const searchStore = defineStore("search", {
                     }
                 }
 
-                console.log(query)
+                // console.log(query)
                 const {data} = await Axios({
                     method: "get",
                     url: "/books/search",

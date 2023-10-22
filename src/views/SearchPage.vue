@@ -38,7 +38,8 @@
                 </div>
                 <div class="col d-flex flex-wrap gap-3">
                     <div 
-                    v-for="category in categories"
+                    v-for="(category, index) in categories"
+                    :key="index"
                     class="form-check">
                         <input 
                         v-model="form.categories"
@@ -57,6 +58,15 @@
             v-for="searchItem in searchResults"
             :book="searchItem"
             />
+            <div class="d-flex justify-content-between">
+                <button 
+                @click.prevent="handlePage('down')"
+                :disabled="counter === 1"
+                class="btn btn-outline-dark">Previous Page</button>
+                <button 
+                @click.prevent="handlePage('up')"
+                class="btn btn-outline-dark">Next Page</button>
+            </div>
         </div>
     </div>
 </template>
@@ -76,6 +86,7 @@ import Card from "../components/Card.vue";
                     book_type: "",
                     categories: []
                 },
+                counter: 1
             }
         },
         components: {
@@ -85,7 +96,22 @@ import Card from "../components/Card.vue";
             ...mapState(searchStore, ["categories", "searchResults"])
         },
         methods: {
-            ...mapActions(searchStore, ["handleSearch"])
+            ...mapActions(searchStore, ["handleSearch"]),
+            handlePage(direction){
+                if (direction ==="up") {
+                    this.counter += 1
+                } else if (direction === "down") {
+                    this.counter -= 1
+                }
+                const {query} = this.$route
+                const obj = {
+                    ...query,
+                    page: this.counter
+                }
+                console.log(obj)
+                this.handleSearch(obj)
+                window.scrollTo(0,0);
+            }
         },
         created(){
             this.handleSearch(this.$route.query)
