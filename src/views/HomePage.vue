@@ -5,15 +5,31 @@
 
 
         <div id="home-search" class="input-group mt-5 w-50 align-self-center">
-        <input type="text" class="form-control border border-dark-subtle" placeholder="Search your favorite book!">
-        <button class="btn btn-outline-secondary text-black" type="button" id="button-addon2">Search</button>
+        <input 
+        v-model="form.title"
+        type="text" class="form-control border border-dark-subtle" placeholder="Search your favorite book!">
+        <button 
+        @click.prevent="handleSearch(form)"
+        class="btn btn-outline-secondary text-black" type="button">Search</button>
         </div>
     </div>
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import {searchStore} from "../stores/searchStore";
     export default {
-        name: "HomePage"
+        name: "HomePage",
+        data(){
+            return {
+                form: {
+                    title: ""
+                }
+            }
+        },
+        methods: {
+            ...mapActions(searchStore, ["handleSearch"])
+        }
     }
 </script>
 
