@@ -1,8 +1,10 @@
 <template>
-    <div>
+    <div v-if="book">
         <header>
             <p>Discussion on: </p>
-            <h1 class="text-center">{{ book.title }}</h1>
+            <h1 
+            @click.prevent="$router.push(`/books/${book.id}`)"
+            class="text-center pointer-hover">{{ book.title }}</h1>
             <p class="text-end">By {{ book.author }}</p>
         </header>
 

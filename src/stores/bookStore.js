@@ -44,7 +44,7 @@ export const bookStore = defineStore("books", {
 
                 this.postDetail = data
             } catch (error) {
-                
+                console.log(error)
             }
         }
     }

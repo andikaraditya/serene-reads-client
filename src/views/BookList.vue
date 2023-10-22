@@ -4,7 +4,7 @@
         <div id="community-container">
             <Card 
             class="pointer-hover"
-            @click.prevent="goToForum(book)"
+            @click.prevent="$router.push(`/books/${book.id}`)"
             v-for="(book, index) in books"
             :key="index"
             :book="book"
@@ -26,10 +26,7 @@ import Card from "../components/Card.vue";
             ...mapState(bookStore, ["books"])
         },
         methods: {
-            ...mapActions(bookStore, ["fetchBooks"]),
-            goToForum(book){
-                this.$router.push(`books/${book.id}`)
-            }
+            ...mapActions(bookStore, ["fetchBooks"])
         },
         created(){
             this.fetchBooks()
