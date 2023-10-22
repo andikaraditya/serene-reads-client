@@ -13,7 +13,7 @@
 
 <script>
 import { mapState } from "pinia";
-import {bookStore} from "../stores/books";
+import { searchStore } from "../stores/searchStore";
 import GenresCard from "../components/GenresCard.vue";
     export default {
         name: "GenresPage",
@@ -21,7 +21,7 @@ import GenresCard from "../components/GenresCard.vue";
             GenresCard
         },
         computed: {
-            ...mapState(bookStore, ["categories"])
+            ...mapState(searchStore, ["categories"])
         }
     }
 </script>

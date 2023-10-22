@@ -2,7 +2,9 @@
     <div>
         <h1 class="text-center">Search Books</h1>
         <div class="search-container container">
-            <form id="search-form">
+            <form 
+            @submit.prevent="handleSearch(form)"
+            id="search-form">
             <div class="row">
                 <div class="col-5">
                     <div class="input-group mb-3">
@@ -51,14 +53,17 @@
             </form>
         </div>
         <div class="search-container">
-            <Card />
+            <Card
+            v-for="searchItem in searchResults"
+            :book="searchItem"
+            />
         </div>
     </div>
 </template>
 
 <script>
-import { mapState } from "pinia";
-import {bookStore} from "../stores/books";
+import { mapState, mapActions } from "pinia";
+import {searchStore} from "../stores/searchStore";
 import Card from "../components/Card.vue";
 
     export default {
@@ -77,7 +82,13 @@ import Card from "../components/Card.vue";
             Card
         },
         computed: {
-            ...mapState(bookStore, ["categories"])
+            ...mapState(searchStore, ["categories", "searchResults"])
+        },
+        methods: {
+            ...mapActions(searchStore, ["handleSearch"])
+        },
+        created(){
+            this.handleSearch(this.$route.query)
         }
     }
 </script>

@@ -3,22 +3,19 @@
         <div class="row g-0">
             <div class="col-md-4 card-image">
                 <img
-                    src="https://placekitten.com/300/300"
+                    :src="book.imageUrl"
                     class="img-fluid"
-                    alt="..."
                 />
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Title</h5>
-                    <p class="card-text">Article by Anonymous</p>
-                    <p class="card-text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit atque
-                        error, neque veniam, autem iste ullam ad ratione reprehenderit enim libero
-                        explicabo odio inventore molestiae quam dolores! Laboriosam, dolore iste?
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text">By {{ book.author }}</p>
+                    <p class="card-text card-main">
+                        {{ book.summary }}
                     </p>
                     <p class="card-text">
-                        <small class="text-body-secondary">Last updated 3 mins ago</small>
+                        <small class="text-body-secondary">ISBN: {{ book.isbn }}</small>
                     </p>
                 </div>
             </div>
@@ -28,7 +25,8 @@
 
 <script>
 export default {
-    name: "Card"
+    name: "Card",
+    props: ["book"]
 }
 </script>
 
@@ -37,8 +35,15 @@ export default {
     max-width: 80%;
     background-color: inherit;
 }
-
 .card-image{
     max-width: 300px;
+}
+
+img {
+    width: 100%;
+}
+.card-main {
+    max-height: 250px;
+    overflow: auto;
 }
 </style>
