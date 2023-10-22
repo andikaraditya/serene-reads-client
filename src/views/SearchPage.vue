@@ -30,7 +30,7 @@
                         <div class="form-check">
                         <input 
                         v-model="form.book_type"
-                        class="form-check-input" value="nonfiction" type="radio" id="nonfiction" checked>
+                        class="form-check-input" value="nonfiction" type="radio" id="nonfiction">
                         <label class="form-check-label" for="nonfiction">
                             Non Fiction
                         </label>
