@@ -2,7 +2,9 @@
     <div>
         <h2 class="text-center mb-4 fs-1">Community Posts</h2>
         <PostCard 
-        v-for="i in 4"
+        v-for="(post, index) in posts"
+        :post="post"
+        :key="index"
         />
     </div>
 </template>
@@ -14,7 +16,8 @@ import PostCard from "../components/PostCard.vue";
         name: "ForumPosts",
         components: {
             PostCard
-        }
+        },
+        props: ["posts"]
     }
 </script>
 
