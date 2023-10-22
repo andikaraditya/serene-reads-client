@@ -5,6 +5,9 @@ import GenresPage from '../views/GenresPage.vue';
 import NewsPage from '../views/NewsPage.vue';
 import SearchPage from '../views/SearchPage.vue';
 import BookList from '../views/BookList.vue';
+import ForumPosts from '../views/ForumPosts.vue';
+import PostDetail from '../views/PostDetail.vue';
+import CreatePost from '../views/CreatePost.vue';
 
 
 const router = createRouter({
@@ -21,9 +24,26 @@ const router = createRouter({
       component: SearchPage
     },
     {
-      path: "/books/:id",
+      path: "/books/:BookId",
       name: "ForumPage",
-      component: ForumPage
+      component: ForumPage,
+      children: [
+        {
+          path: "",
+          name: "ForumPosts",
+          component: ForumPosts
+        },
+        {
+          path: "posts/:PostId",
+          name: "PostDetail",
+          component: PostDetail
+        },
+        {
+          path: "create",
+          name: "CreatePost",
+          component: CreatePost
+        }
+      ]
     },
     {
       path: "/genres",

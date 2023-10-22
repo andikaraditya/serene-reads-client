@@ -27,12 +27,6 @@ import GenresCard from "../components/GenresCard.vue";
 </script>
 
 <style scoped>
-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 0.6rem;
-}
-
 #genre-container {
     /* background-color: red; */
     width: 80%;

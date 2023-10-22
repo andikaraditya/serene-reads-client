@@ -18,12 +18,6 @@ import Card from "../components/Card.vue";
 </script>
 
 <style scoped>
-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 0.6rem;
-}
-
 #news-container {
     width: 80%;
     margin: 3rem auto;

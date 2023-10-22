@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="text-center">Available Communities</h1>
-        <div id="news-container">
+        <div id="community-container">
             <Card />
         </div>
     </div>
@@ -17,13 +17,7 @@ import Card from "../components/Card.vue";
 </script>
 
 <style scoped>
-h1 {
-    font-size: 3rem;
-    font-weight: bold;
-    letter-spacing: 0.6rem;
-}
-
-#news-container {
+#community-container {
     width: 80%;
     margin: 3rem auto;
 }

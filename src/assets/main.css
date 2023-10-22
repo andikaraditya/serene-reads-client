@@ -2,3 +2,13 @@ body {
   background-color: #E7DFD8;
   font-family: 'Gabarito', sans-serif;
 }
+
+h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  letter-spacing: 0.6rem;
+}
+
+.pointer-hover:hover {
+  cursor: pointer;
+}
