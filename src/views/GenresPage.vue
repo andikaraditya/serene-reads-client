@@ -6,14 +6,15 @@
             <GenresCard 
             v-for="category in categories"
             :category="category"
+            @click.prevent="$router.push({name:'SearchPage', query:{categories:category}})"
             />
         </div>
     </div>
 </template>
 
 <script>
-import { mapState } from "pinia";
-import {bookStore} from "../stores/books";
+import { mapState, mapActions } from "pinia";
+import { searchStore } from "../stores/searchStore";
 import GenresCard from "../components/GenresCard.vue";
     export default {
         name: "GenresPage",
@@ -21,7 +22,7 @@ import GenresCard from "../components/GenresCard.vue";
             GenresCard
         },
         computed: {
-            ...mapState(bookStore, ["categories"])
+            ...mapState(searchStore, ["categories"])
         }
     }
 </script>
