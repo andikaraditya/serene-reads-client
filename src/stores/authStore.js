@@ -30,6 +30,21 @@ export const authStore = defineStore("auth", {
             localStorage.removeItem("access_token")
             this.access_token = null
             this.$toast.success("logout Successfull")
+        },
+        async handleRegister(form) {
+            try {
+                await Axios({
+                    method: "post",
+                    url: "/register",
+                    data: form
+                })
+
+                this.$toast.success("Register successfull, now you can login")
+                this.$router.push("/login")
+            } catch (error) {
+                this.$toast.error(error.response.data.message)
+                console.log(error)
+            }
         }
     }
 })

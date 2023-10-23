@@ -13,11 +13,11 @@
                 <label class="fs-3" for="email">Email:</label>
                 <input 
                 v-model="form.email"
-                class="form-control" type="text" name="email" id="email">
+                class="form-control" type="text" name="email" id="email" required>
                 <label class="fs-3 mt-4" for="password">Password:</label>
                 <input 
                 v-model="form.password"
-                class="form-control" type="password" name="password" id="password">
+                class="form-control" type="password" name="password" id="password" required>
                 <button class="btn btn-outline-dark mt-5 w-100">Login</button>
             </form>
         </div>
