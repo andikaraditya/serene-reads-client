@@ -25,6 +25,11 @@ export const authStore = defineStore("auth", {
                 this.$toast.error(error.response.data.message)
                 console.log(error)
             }
+        },
+        async handleLogout() {
+            localStorage.removeItem("access_token")
+            this.access_token = null
+            this.$toast.success("logout Successfull")
         }
     }
 })

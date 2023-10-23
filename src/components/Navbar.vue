@@ -37,7 +37,14 @@
                 </a>
             </div>
             <div class="col">
+                <a 
+                v-if="access_token"
+                @click.prevent="handleLogout"
+                href="">
+                    Logout
+                </a>
                 <a
+                v-else
                 @click.prevent="$router.push('/login')"
                 href="#">
                     Login
@@ -48,8 +55,16 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "pinia";
+import {authStore} from "../stores/authStore";
     export default {
-        name: "Navbar"
+        name: "Navbar",
+        computed: {
+            ...mapState(authStore, ["access_token"])
+        },
+        methods: {
+            ...mapActions(authStore, ["handleLogout"])
+        }
     }
 </script>
 
