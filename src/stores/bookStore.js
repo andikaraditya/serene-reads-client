@@ -47,6 +47,30 @@ export const bookStore = defineStore("books", {
             } catch (error) {
                 console.log(error)
             }
+        },
+        async handleCreatePost(form, BookId){
+            // console.log(form)
+            // console.log(BookId)
+            try {
+                const {data} = await Axios({
+                    method: "post",
+                    url: `/books/${BookId}/posts`,
+                    data: form,
+                    headers: {
+                        access_token: localStorage.access_token
+                    }
+                })
+                this.fetchBookById(BookId)
+                this.$router.push({name:"PostDetail", params: {
+                    PostId: data.id
+                }})
+            } catch (error) {
+                if (error.response.data.message === "User authentication failed") {
+                    this.$toast.error("You need to login first")
+                } else {
+                    console.log(error)
+                }
+            }
         }
     }
 })

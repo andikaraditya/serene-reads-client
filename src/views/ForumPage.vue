@@ -30,6 +30,7 @@
 <script>
 import { mapActions, mapState } from "pinia";
 import {bookStore} from "../stores/bookStore";
+import { authStore } from "../stores/authStore";
 import { RouterView } from 'vue-router';
 
     export default {
@@ -38,7 +39,8 @@ import { RouterView } from 'vue-router';
             RouterView
         },
         computed: {
-            ...mapState(bookStore, ["book"])
+            ...mapState(bookStore, ["book"]),
+            ...mapState(authStore, ["access_token"])
         },
         methods: {
             ...mapActions(bookStore, ["fetchBookById"])

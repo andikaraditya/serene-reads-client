@@ -1,7 +1,9 @@
 <template>
     <div class="border border-3 border-black rounded-4 p-4 px-5">
         <h1 class="text-center">CreatePost</h1>
-        <form class="d-flex flex-column gap-3">
+        <form 
+        @submit.prevent="sendForm"
+        class="d-flex flex-column gap-3">
             <label class="fs-3" for="title">Post title:</label>
             <input 
             v-model="form.title"
@@ -13,15 +15,17 @@
             </textarea>
             <div class="d-flex justify-content-between">
                 <a 
-                @click.prevent="$router.go(-1)"
+                @click.prevent="$router.replace({name: 'ForumPosts'})"
                 href="" class="btn btn-dark mt-3">Cancel</a>
-                <a href="" class="btn btn-outline-dark mt-3">Create post</a>
+                <button type="submit" class="btn btn-outline-dark mt-3">Create post</button>
             </div>
         </form>
     </div>
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import { bookStore } from "../stores/bookStore";
     export default {
         name: "CreatePost",
         data() {
@@ -30,6 +34,13 @@
                     title: "",
                     content: ""
                 }
+            }
+        },
+        methods: {
+            ...mapActions(bookStore, ["handleCreatePost"]),
+            sendForm(){
+                const {BookId} = this.$route.params
+                this.handleCreatePost(this.form, BookId)
             }
         }
     }

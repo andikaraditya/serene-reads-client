@@ -1,12 +1,14 @@
 <template>
     <div>
         <p 
-        @click.prevent="$router.go(-1)"
+        @click.prevent="$router.replace({name: 'ForumPosts'})"
         class="fs-4 pointer-hover">⬅ back to forum</p>
         <div class="border border-3 border-black rounded-4 p-4">
-            <h2 class="text-center mb-4 fs-1">{{ post.title }}</h2>
-            <p class="fs-5">Posted by: {{ post.User.username }}</p>
-            <p>Posted on {{ getDate }}</p>
+            <h2 class="mb-4 fs-1">{{ post.title }}</h2>
+            <div class="d-flex justify-content-between">
+                <p>Posted by: {{ post.User.username }}</p>
+                <p>Posted on {{ getDate }}</p>
+            </div>
             <p class="fs-4">{{ post.content }}</p>
         </div>
     </div>
