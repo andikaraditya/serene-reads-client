@@ -37,7 +37,7 @@
                 </a>
             </div>
             <div class="col">
-                <a 
+                <a
                 @click.prevent="$router.push('/login')"
                 href="#">
                     Login
@@ -69,5 +69,9 @@ a {
     text-decoration: none;
     color: black;
     margin: auto;
+}
+
+a:hover {
+    font-weight: 600;
 }
 </style>

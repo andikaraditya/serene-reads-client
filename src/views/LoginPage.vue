@@ -7,7 +7,9 @@
                 <a 
                 @click.prevent="$router.push('/register')"
                 class="pointer-hover">here</a> to create new account</p>
-            <form action="">
+            <form 
+            @submit.prevent="handleLogin(form)"
+            action="">
                 <label class="fs-3" for="email">Email:</label>
                 <input 
                 v-model="form.email"
@@ -23,6 +25,8 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import {authStore} from "../stores/authStore";
     export default {
         name: "LoginPage",
         data(){
@@ -32,6 +36,9 @@
                     password: ""
                 }
             }
+        },
+        methods: {
+            ...mapActions(authStore, ["handleLogin"])
         }
     }
 </script>

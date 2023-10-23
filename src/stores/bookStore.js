@@ -5,7 +5,8 @@ export const bookStore = defineStore("books", {
     state: () => ({
         books: [],
         book: null,
-        postDetail: {}
+        postDetail: {},
+        access_token: null
     }),
     getters: {
 
