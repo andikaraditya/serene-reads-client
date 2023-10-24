@@ -24,6 +24,6 @@ pinia.use(({ store }) => {
 
 app.use(pinia)
 app.use(router)
-app.use(Toast, { timeout: 2000 })
+app.use(Toast, { timeout: 3000 })
 
 app.mount('#app')
