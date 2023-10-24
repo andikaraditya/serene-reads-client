@@ -71,6 +71,29 @@ export const bookStore = defineStore("books", {
                     console.log(error)
                 }
             }
+        },
+        async handleAddBook(form) {
+            try {
+                await Axios({
+                    method: "post",
+                    url: "/books",
+                    data: form,
+                    headers: {
+                        access_token: localStorage.access_token
+                    }
+                })
+
+                this.fetchBooks()
+                this.$router.push("/books")
+            } catch (error) {
+                if (error.response.data.message === "User authentication failed") {
+                    this.$toast.error("You need to login first")
+                } else if (error.response.data.message === "isbn must be unique") {
+                    this.$router.push("/books")
+                } else {
+                    console.log(error)
+                }
+            }
         }
     }
 })
