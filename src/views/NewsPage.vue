@@ -7,6 +7,12 @@
             :key="index"
             :newsItem="newsItem"
             />
+            <div 
+            v-if="!isBusy"
+            class="text-center">
+                <img src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" alt="">
+                <p class="fs-1">Loading news</p>
+            </div>
         </div>
     </div>
 </template>
