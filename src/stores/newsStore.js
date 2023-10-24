@@ -3,7 +3,9 @@ import { Axios } from "../helpers/axios";
 
 export const newsStore = defineStore("news", {
     state: () => ({
-        news: []
+        news: [],
+        isBusy: false,
+        counter: 1
     }),
     getters: {
 
@@ -11,12 +13,24 @@ export const newsStore = defineStore("news", {
     actions: {
         async fetchNews() {
             try {
+                if (this.news.length > 90) {
+                    this.$toast.info("This is the end of the page. We cannot get more news due our limitation. We apologize for this inconvenience", {
+                    timeout: 15000
+                    })
+                    return
+                } 
+                this.isBusy = true
                 const {data} = await Axios({
                     method: "get",
-                    url: "/news"
+                    url: "/news",
+                    params: {
+                        page: this.counter
+                    }
                 })
 
-                this.news = data
+                this.news.push(...data)
+                this.counter += 1
+                this.isBusy = false
             } catch (error) {
                 console.log(error)
             }
