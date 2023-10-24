@@ -64,6 +64,7 @@
             v-else
             v-for="searchItem in searchResults"
             :book="searchItem"
+            :loc="'search'"
             />
             <div class="d-flex justify-content-between">
                 <button 

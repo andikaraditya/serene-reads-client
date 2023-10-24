@@ -17,6 +17,11 @@
                     <p class="card-text">
                         <small class="text-body-secondary">ISBN: {{ book.isbn }}</small>
                     </p>
+                <button
+                @click.prevent="handleAddBook(book)"
+                v-if="loc ==='search'"
+                class="btn btn-outline-dark"
+                >See Community</button>
                 </div>
             </div>
         </div>
@@ -24,9 +29,15 @@
 </template>
 
 <script>
+import { mapActions } from "pinia";
+import {bookStore} from "../stores/bookStore";
+
 export default {
     name: "Card",
-    props: ["book"]
+    props: ["book", "loc"],
+    methods: {
+        ...mapActions(bookStore, ["handleAddBook"])
+    }
 }
 </script>
 
