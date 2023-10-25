@@ -9,7 +9,10 @@
                 <p>Posted by: {{ post.User.username }}</p>
                 <p>Posted on {{ getDate }}</p>
             </div>
-            <p class="fs-4">{{ post.content }}</p>
+            <p class="fs-4 mb-5">{{ post.content }}</p>
+            <Disqus
+            :pageConfig="pageConfig"
+            />
         </div>
     </div>
 </template>
@@ -32,7 +35,10 @@ import {bookStore} from "../stores/bookStore";
                     User: {
                         username: ""
                     }
-                }
+                },
+                pageConfig: {
+                    identifier: this.$route.params.PostId
+                },
             }
         },
         watch: {
