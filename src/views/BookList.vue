@@ -49,6 +49,9 @@
                 class="btn btn-outline-dark">Next Page</button>
             </div>
         </div>
+        <button 
+        @click.prevent="scrollTop"
+        class="btn btn-outline-dark fs-3 fw-bold to-top">↑</button>
     </div>
 </template>
 
@@ -116,6 +119,9 @@ import Card from "../components/Card.vue";
                         this.fetchBooks(this.viewMode, obj)
                     }
                 }
+            },
+            scrollTop(){
+                window.scrollTo(0,0)
             }
         },
         created(){

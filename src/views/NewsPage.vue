@@ -14,6 +14,9 @@
                 <p class="fs-1">Loading news</p>
             </div>
         </div>
+        <button 
+        @click.prevent="scrollTop"
+        class="btn btn-outline-dark fs-3 fw-bold to-top">↑</button>
     </div>
 </template>
 
@@ -45,6 +48,9 @@ import Card from "../components/Card.vue";
                         this.fetchNews()
                     }
                 }
+            },
+            scrollTop(){
+                window.scrollTo(0,0)
             }
         },
         created(){
