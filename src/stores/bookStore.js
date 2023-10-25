@@ -6,20 +6,38 @@ export const bookStore = defineStore("books", {
         books: [],
         book: null,
         postDetail: {},
-        access_token: null
+        access_token: null,
+        isBusy: false,
     }),
     getters: {
 
     },
     actions: {
-        async fetchBooks(){
+        async fetchBooks(mode, params){
             try {
+                this.isBusy = true
                 const {data} = await Axios({
                     method: "get",
-                    url: "/books"
+                    url: "/books",
+                    params: params
                 })
 
-                this.books = data
+                
+                this.$router.push({path: "/books", query: params})
+                if (mode === "page") {
+                    this.books = data
+                } else if (mode === "scroll") {
+                    if (data.length === 0) {
+                        this.$toast.info("This is the end of the page. There is no more available communities. Go to search page to add more communities", {
+                        timeout: 15000
+                        })
+                        return
+                    }
+                    this.books.push(...data)
+                }
+                setTimeout(() => {
+                    this.isBusy = false
+                }, 1500);
             } catch (error) {
                 console.log(error)
             }
