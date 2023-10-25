@@ -68,25 +68,59 @@ export const bookStore = defineStore("books", {
         },
         async handleCreatePost(form, BookId){
             // console.log(form)
-            // console.log(BookId)
-            try {
-                const {data} = await Axios({
-                    method: "post",
-                    url: `/books/${BookId}/posts`,
-                    data: form,
-                    headers: {
-                        access_token: localStorage.access_token
-                    }
-                })
-                this.fetchBookById(BookId)
-                this.$router.push({name:"PostDetail", params: {
-                    PostId: data.id
-                }})
-            } catch (error) {
-                if (error.response.data.message === "User authentication failed") {
-                    this.$toast.error("You need to login first")
+            if (form.schedule) {
+                const scheduledTime = new Date(form.schedule).getTime()
+                if (Date.now() > scheduledTime) {
+                    this.$toast.error("You can't create post into the past")
+                    return
                 } else {
-                    console.log(error)
+                    // console.log(scheduledTime, "<<<< Timestamp")
+                    // console.log(new Date(scheduledTime), "<<<< Date instance")
+                    try {
+                        const {data} = await Axios({
+                            method: "post",
+                            url: `/books/${BookId}/posts/schedules`,
+                            data: {
+                                title: form.title,
+                                content: form.content,
+                                scheduledTime: scheduledTime
+                            },
+                            headers: {
+                                access_token: localStorage.access_token
+                            }
+                        })
+                        this.$toast.success("Post has been scheduled")
+                        this.$router.push({name: "ForumPosts", params: {BookId: BookId}})
+                    } catch (error) {
+                        if (error.response.data.message === "User authentication failed") {
+                            this.$toast.error("You need to login first")
+                        } else {
+                            console.log(error)
+                        }
+                    }
+                }
+            } else {
+                // console.log("no schedule")
+                // console.log(BookId)
+                try {
+                    const {data} = await Axios({
+                        method: "post",
+                        url: `/books/${BookId}/posts`,
+                        data: form,
+                        headers: {
+                            access_token: localStorage.access_token
+                        }
+                    })
+                    this.fetchBookById(BookId)
+                    this.$router.push({name:"PostDetail", params: {
+                        PostId: data.id
+                    }})
+                } catch (error) {
+                    if (error.response.data.message === "User authentication failed") {
+                        this.$toast.error("You need to login first")
+                    } else {
+                        console.log(error)
+                    }
                 }
             }
         },
@@ -112,6 +146,6 @@ export const bookStore = defineStore("books", {
                     console.log(error)
                 }
             }
-        }
+        },
     }
 })
