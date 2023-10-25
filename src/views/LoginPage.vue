@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="login-card">
+        <div class="login-card d-flex flex-column">
             <h1 class="text-center">Login</h1>
             <p class="text-center fs-4">Login with an existing account</p>
             <p class="text-center fs-5">If you don't have an account, click 
@@ -20,6 +20,7 @@
                 class="form-control" type="password" name="password" id="password" required>
                 <button class="btn btn-outline-dark mt-5 w-100">Login</button>
             </form>
+            <GoogleLogin class="m-auto mb-2 mt-3" :callback="googleLogin"/>
         </div>
     </div>
 </template>
@@ -38,7 +39,7 @@ import {authStore} from "../stores/authStore";
             }
         },
         methods: {
-            ...mapActions(authStore, ["handleLogin"])
+            ...mapActions(authStore, ["handleLogin", "googleLogin"])
         }
     }
 </script>
