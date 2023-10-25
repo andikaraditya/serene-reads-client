@@ -13,6 +13,10 @@
             v-model="form.content"
             class="form-control" name="content" id="content" rows="8">
             </textarea>
+            <label class="fs-3" for="date">Schedule post:</label>
+            <input 
+            v-model="form.schedule"
+            type="datetime-local" name="" id="date">
             <div class="d-flex justify-content-between">
                 <a 
                 @click.prevent="$router.replace({name: 'ForumPosts'})"
@@ -32,8 +36,9 @@ import { bookStore } from "../stores/bookStore";
             return {
                 form: {
                     title: "",
-                    content: ""
-                }
+                    content: "",
+                    schedule: null
+                },
             }
         },
         methods: {

@@ -12,7 +12,7 @@
                 href="" class="btn btn-outline-dark">Discuss</a>
                 <DisqusCount 
                 class="fs-5"
-                shortname='serene-reads' :identifier="post.id" />
+                shortname='serene-reads' :identifier="`${post.id}`" />
             </div>
         </div>
     </div>
