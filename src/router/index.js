@@ -75,4 +75,13 @@ const router = createRouter({
   ]
 })
 
+router.beforeEach((to, from) => {
+    if (to.name === "CreatePost" || to.name === "PostDetail") {
+      window.scrollTo(0,200)
+    }
+    if (to.name === "ForumPosts") {
+      window.scrollTo(0,100)
+    }
+})
+
 export default router
