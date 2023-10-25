@@ -19,6 +19,16 @@
                 </div>
                 <button class="btn btn-outline-dark">Search</button>
             </form>
+            <div class="input-group mb-4 w-25">
+                <label class="input-group-text" for="inputGroupSelect01">View Mode</label>
+                    <select 
+                    v-model="viewMode"
+                    @change="handleChangeView"
+                    class="form-select" id="inputGroupSelect01">
+                        <option selected value="page">Page</option>
+                        <option value="scroll">Scroll</option>
+                    </select>
+            </div>
             <Card 
             class="pointer-hover"
             @click.prevent="$router.push(`/books/${book.id}`)"
@@ -26,7 +36,9 @@
             :key="index"
             :book="book"
             />
-            <div class="d-flex justify-content-between">
+            <div 
+            v-if="viewMode === 'page'"
+            class="d-flex justify-content-between">
                 <button 
                 @click.prevent="handlePage('down')"
                 :disabled="counter === 1"
@@ -41,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "pinia";
+import { mapActions, mapState, mapWritableState } from "pinia";
 import {bookStore} from "../stores/bookStore";
 import Card from "../components/Card.vue";
     export default {
@@ -52,19 +64,23 @@ import Card from "../components/Card.vue";
                     title: "",
                     author: ""
                 },
-                counter: 1
+                counter: 1,
+                viewMode: "page",
+
             }
         },
         components: {
             Card
         },
         computed: {
-            ...mapState(bookStore, ["books"])
+            ...mapWritableState(bookStore, ["books"]),
+            ...mapState(bookStore, ["isBusy"])
         },
         methods: {
             ...mapActions(bookStore, ["fetchBooks"]),
             handleSearch() {
-                this.fetchBooks(this.form)
+                this.viewMode = "page"
+                this.fetchBooks(this.viewMode, this.form)
             },
             handlePage(direction){
                 if (direction ==="up") {
@@ -78,12 +94,41 @@ import Card from "../components/Card.vue";
                     page: this.counter
                 }
                 // console.log(obj)
-                this.fetchBooks(obj)
+                this.fetchBooks(this.viewMode, obj)
                 window.scrollTo(0,0);
+            },
+            handleChangeView(){
+                this.books = []
+                this.counter = 1
+                this.$router.push("/books")
+                this.fetchBooks(this.viewMode)
+            },
+            handleScroll(e){
+                if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight) {
+                    if (!this.isBusy && this.viewMode === "scroll") {
+                        console.log("you're at the bottom of the page")
+                        const {query} = this.$route
+                        this.counter += 1
+                        const obj = {
+                            ...query,
+                            page: this.counter
+                        }
+                        this.fetchBooks(this.viewMode, obj)
+                    }
+                }
             }
         },
         created(){
-            this.fetchBooks(this.$route.query)
+            if (this.$route.query.page) {
+                this.counter = Number(this.$route.query.page)
+            }
+            this.fetchBooks(this.viewMode, this.$route.query)
+        },
+        mounted(){
+            window.addEventListener("scroll", this.handleScroll)
+        },
+        unmounted(){
+            window.removeEventListener("scroll", this.handleScroll)
         }
     }
 </script>
