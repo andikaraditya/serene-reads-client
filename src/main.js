@@ -7,6 +7,8 @@ import Toast from "vue-toastification";
 import { useToast } from "vue-toastification";
 import "vue-toastification/dist/index.css";
 
+import vue3GoogleLogin from 'vue3-google-login'
+
 import VueDisqus from 'vue-disqus'
 
 import App from './App.vue'
@@ -22,6 +24,10 @@ pinia.use(({ store }) => {
 
 pinia.use(({ store }) => {
     store.$toast = markRaw(useToast())
+})
+
+app.use(vue3GoogleLogin, {
+    clientId: '591421090928-osqp5idar7ptthq1ud9g2prqmcic2hc8.apps.googleusercontent.com'
 })
 
 app.use(pinia)
