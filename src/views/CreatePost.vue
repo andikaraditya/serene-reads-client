@@ -13,10 +13,19 @@
             v-model="form.content"
             class="form-control" name="content" id="content" rows="8">
             </textarea>
-            <label class="fs-3" for="date">Schedule post:</label>
+            <div class="form-check">
+                <input 
+                v-model="checked"
+                class="form-check-input me-3" type="checkbox" id="date">
+                <label class="form-check-label fs-3 pointer-hover" for="date">
+                    Scheduled post
+                </label>
+            </div>
             <input 
+            v-if="checked"
             v-model="form.schedule"
-            type="datetime-local" name="" id="date">
+            class="form-control pointer-hover"
+            type="datetime-local">
             <div class="d-flex justify-content-between">
                 <a 
                 @click.prevent="$router.replace({name: 'ForumPosts'})"
@@ -39,14 +48,25 @@ import { bookStore } from "../stores/bookStore";
                     content: "",
                     schedule: null
                 },
+                checked: false
             }
         },
         methods: {
             ...mapActions(bookStore, ["handleCreatePost"]),
             sendForm(){
                 const {BookId} = this.$route.params
+                if (!this.checked) {
+                    this.form.schedule = null
+                }
                 this.handleCreatePost(this.form, BookId)
             }
         }
     }
 </script>
+
+<style scoped>
+#date {
+    height: 1.5rem;
+    width: 1.5rem;
+}
+</style>
