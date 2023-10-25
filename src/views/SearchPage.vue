@@ -64,6 +64,7 @@
             v-else
             v-for="searchItem in searchResults"
             :book="searchItem"
+            :loc="'search'"
             />
             <div class="d-flex justify-content-between">
                 <button 
@@ -115,7 +116,7 @@ import Card from "../components/Card.vue";
                     ...query,
                     page: this.counter
                 }
-                console.log(obj)
+                // console.log(obj)
                 this.handleSearch(obj)
                 window.scrollTo(0,0);
             }
