@@ -26,6 +26,16 @@
             :key="index"
             :book="book"
             />
+            <div class="d-flex justify-content-between">
+                <button 
+                @click.prevent="handlePage('down')"
+                :disabled="counter === 1"
+                class="btn btn-outline-dark">Previous Page</button>
+                <button 
+                :disabled="books.length < 8"
+                @click.prevent="handlePage('up')"
+                class="btn btn-outline-dark">Next Page</button>
+            </div>
         </div>
     </div>
 </template>
@@ -41,7 +51,8 @@ import Card from "../components/Card.vue";
                 form:{
                     title: "",
                     author: ""
-                }
+                },
+                counter: 1
             }
         },
         components: {
@@ -54,9 +65,22 @@ import Card from "../components/Card.vue";
             ...mapActions(bookStore, ["fetchBooks"]),
             handleSearch() {
                 this.fetchBooks(this.form)
-                this.$router.push({path: "/books", query: this.form})
+            },
+            handlePage(direction){
+                if (direction ==="up") {
+                    this.counter += 1
+                } else if (direction === "down") {
+                    this.counter -= 1
+                }
+                const {query} = this.$route
+                const obj = {
+                    ...query,
+                    page: this.counter
+                }
+                // console.log(obj)
+                this.fetchBooks(obj)
+                window.scrollTo(0,0);
             }
-            
         },
         created(){
             this.fetchBooks(this.$route.query)
