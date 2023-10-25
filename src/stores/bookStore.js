@@ -12,13 +12,15 @@ export const bookStore = defineStore("books", {
 
     },
     actions: {
-        async fetchBooks(){
+        async fetchBooks(params){
             try {
                 const {data} = await Axios({
                     method: "get",
-                    url: "/books"
+                    url: "/books",
+                    params: params
                 })
 
+                this.$router.push({path: "/books", query: params})
                 this.books = data
             } catch (error) {
                 console.log(error)
