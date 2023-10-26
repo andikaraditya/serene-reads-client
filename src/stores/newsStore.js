@@ -13,6 +13,7 @@ export const newsStore = defineStore("news", {
     actions: {
         async fetchNews() {
             try {
+                //! 100 news item limits
                 if (this.news.length > 90) {
                     this.$toast.info("This is the end of the page. We cannot get more news due our limitation. We apologize for this inconvenience", {
                     timeout: 15000

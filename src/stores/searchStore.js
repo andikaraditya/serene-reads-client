@@ -34,8 +34,12 @@ export const searchStore = defineStore("search", {
                 })
 
                 this.$router.push({path: "/search", query: query})
-                this.searchResults = data
-                this.loading = false
+
+                //! 1 api call per second
+                setTimeout(() => {
+                    this.searchResults = data
+                    this.loading = false
+                }, 800);
             } catch (error) {
                 console.log(error)
             }
