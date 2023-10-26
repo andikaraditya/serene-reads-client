@@ -12,3 +12,11 @@ h1 {
 .pointer-hover:hover {
   cursor: pointer;
 }
+
+.to-top {
+  width: 60px;
+  bottom:1rem;
+  right: 1rem;
+  position:fixed;
+  z-index:150;
+}

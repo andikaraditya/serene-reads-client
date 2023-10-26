@@ -24,6 +24,9 @@
                 </div>
             </div>
         </div>
+        <button 
+        @click.prevent="scrollTop"
+        class="btn btn-outline-dark fs-3 fw-bold to-top">↑</button>
     </div>
 </template>
 
@@ -43,7 +46,10 @@ import { RouterView } from 'vue-router';
             ...mapState(authStore, ["access_token"])
         },
         methods: {
-            ...mapActions(bookStore, ["fetchBookById"])
+            ...mapActions(bookStore, ["fetchBookById"]),
+            scrollTop(){
+                window.scrollTo(0,0)
+            }
         },
         created() {
             const {BookId} = this.$route.params
