@@ -49,7 +49,7 @@ export const authStore = defineStore("auth", {
         async googleLogin(params) {
             try {
                 const {credential} = params
-                console.log(credential)
+                // console.log(credential)
                 const response = await Axios({
                     method: "post",
                     url: "/auth/google",
